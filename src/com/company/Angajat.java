@@ -1,4 +1,10 @@
 package com.company;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,21 +16,127 @@ import java.util.List;
         private Angajat superior;
         private Departament departament;
         private Functie functie;
-        private List<Proiect> proiecte;
-        private List<Salariu> salarii;
-        private List<Concediu> concedii;
+        private List<Proiect> listaProiecte;
+        private List<Salariu> listaSalarii;
+        private List<Concediu> listaConcedii;
 
 
-        public Angajat(long idAngajat, String nume, String prenume, Date dataAngajarii, Angajat superior, Departament departament, Functie functie){
+        public long getIdAngajat() {
+            return idAngajat;
+        }
+
+        public void setIdAngajat(long idAngajat) {
+            this.idAngajat = idAngajat;
+        }
+
+        public String getNume() {
+            return nume;
+        }
+
+        public void setNume(String nume) {
+            this.nume = nume;
+        }
+
+        public String getPrenume() {
+            return prenume;
+        }
+
+        public void setPrenume(String prenume) {
+            this.prenume = prenume;
+        }
+
+        public Date getDataAngajarii() {
+            return dataAngajarii;
+        }
+
+        public void setDataAngajarii(Date dataAngajarii) {
+            this.dataAngajarii = dataAngajarii;
+        }
+
+        public Angajat getSuperior() {
+            return superior;
+        }
+
+        public void setSuperior(Angajat superior) {
+            this.superior = superior;
+        }
+
+        public Departament getDepartament() {
+            return departament;
+        }
+
+        public void setDepartament(Departament departament) {
+            this.departament = departament;
+        }
+
+        public void setListaSalarii(List<Salariu> listaSalarii) {
+            this.listaSalarii = listaSalarii;
+        }
+
+        public void setListaConcedii(List<Concediu> listaConcedii) {
+            this.listaConcedii = listaConcedii;
+        }
+
+        public Functie getFunctie() {
+            return functie;
+        }
+
+        public void setFunctie(Functie functie) {
+            this.functie = functie;
+        }
+
+        public List<Proiect> getListaProiecte() {
+            return listaProiecte;
+        }
+
+        public void setListaProiecte(List<Proiect> listaProiecte) {
+            this.listaProiecte = listaProiecte;
+        }
+
+        public List<Salariu> getListaSalarii() {
+            return listaSalarii;
+        }
+
+        public List<Concediu> getListaConcedii() {
+            return listaConcedii;
+        }
+
+        public Angajat(long idAngajat, String nume, String prenume, Date dataAngajarii, long idSuperior, long idDepartament, long idFunctie){
             this.idAngajat=idAngajat;
             this.nume=nume;
             this.prenume=prenume;
             this.dataAngajarii=dataAngajarii;
-            this.superior=superior;
-            this.departament=departament;
+            this.superior=getAngajat(idSuperior);
             this.functie=functie;
-
         }
+
+        private static final String Angajati_FILE = "c:\\InternshipBancaTransilvania\\Companie\\angajatiCompanie.txt";
+
+        public List<Angajat> citireaTuturorAngajatilor() throws IOException {
+            List<Angajat> listaAngajati = new ArrayList<>();
+            try (BufferedReader angajatReader = new BufferedReader(new FileReader(Angajati_FILE))) {
+                String angajatLine = null;
+                while ((angajatLine = angajatReader.readLine()) != null) {
+                    if (angajatLine != null) {
+                        String[] angajatiCompanie = angajatLine.split(";");
+                        listaAngajati.add(new Angajat(Long.parseLong(angajatiCompanie[0]), angajatiCompanie[1], angajatiCompanie[2], new SimpleDateFormat("MM/dd/yyyy").parse(angajatiCompanie[3]), Long.parseLong(angajatiCompanie[4]),Long.parseLong(angajatiCompanie[5]),Long.parseLong(angajatiCompanie[6])));
+                    }
+                }
+            } catch (IOException | ParseException e) {
+                e.printStackTrace();
+            }
+            return listaAngajati;
+        }
+
+       public static Angajat getAngajat(long idAngajat){
+           List<Angajat> listaAngajati = new ArrayList<>();
+            for (int i = 0; i<listaAngajati.size(); i++) {
+                if (listaAngajati.get(i).equals(idAngajat))
+                    return listaAngajati.get(i);
+            }
+            return null;
+        }
+
 
     }
 

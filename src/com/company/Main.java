@@ -1,25 +1,65 @@
 package com.company;
 
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
 	// write your code here text
         Scanner scan =new Scanner(System.in);
-        System.out.println("Introduceti numarul de angajati: ");
-        int nr_angajati=scan.nextInt();
-        Angajat[] angajat_companie=new Angajat[nr_angajati];
-        /*for(int i=0; i<nr_angajati;i++){
-            System.out.println("Introduceti numele angajatului"+(i+1));
-            String nume=scan.next();*/
+        //System.out.println("Introduceti id angajatului pentru care doriti sa se calculeze salariul: ");
+        //Angajat angajatCompanie=new Angajat(55,"Rovina", "Luiza", new SimpleDateFormat("MM/dd/yyyy").parse("10/02/2018"),1, 1,8);
+        /* List<Functie> functiiCompanie= new ArrayList<>();
+        try {
+            functiiCompanie=Functie.citireaTuturorFunctiilor();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        //angajat_companie[0]=new Angajat("Cristi", "03/06/2020","manager", "")
+        for(int i =0 ; i<functiiCompanie.size();i++)
+        {
+            System.out.println(functiiCompanie.get(i).getDenumireFunctie());
+    }*/
+
+
+        List<Proiect> proiecteCompanie= new ArrayList<>();
+        try {
+            proiecteCompanie=Proiect.citireaTuturorProiectelor();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for(int i = 0 ; i<proiecteCompanie.size();i++)
+        {
+            System.out.println(proiecteCompanie.get(i).getDenumireProiect());
+        }
+
         }
     }
 
-       /* int calcul_Salar(String nume, String denumire){
-            int salar_actualizat;
-            if(denumire==this.denumire)
-                salar_actualizat=this.salar_baza*calcul_vechime(getData_angajarii(),data_curenta);*/
+    /*
+        LocalDate data_curenta=LocalDate.now();
+    public int calcul_vechime(Date data_angajarii, Date data_curenta) {
+        int vechime = Period.between(super.getDataAngajarii(), data_curenta).getYears();
+        if (vechime==0||vechime==1)
+            return 1;
+        else
+        if(vechime>1)
+            return vechime;
+    }
+
+    public int calcul_Salar(String nume, String denumire){
+        int salarActualizat;
+        if(denumire==this.denumireFunctie)
+            salarActualizat=this.salarBaza*calcul_vechime(getDataAngajarii(),data_curenta);
+    }*/
+
 
