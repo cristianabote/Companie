@@ -82,7 +82,7 @@ public class Proiect {
 
         return listaProiecte;
     }
-   public void numeAngajatiIndisponibili(String denumireProiect) throws IOException {
+   public static void numeAngajatiIndisponibili(String denumireProiect) throws IOException {
         List<Angajat> totiAngajatiiCompanie = new ArrayList<>();
         List<Concediu> concediuAngajat = new ArrayList<>();
         try {
@@ -103,7 +103,8 @@ public class Proiect {
        if(gasit==0) {
            System.out.println("Proiectul nu a fost gasit.");
        }
-  /*      for (int k = 0; k < totiAngajatiiCompanie.size(); i++) {
+  /*   else {
+       for (int k = 0; k < totiAngajatiiCompanie.size(); i++) {
            boolean ok = LocalDate.parse(concediuAngajat.get(k).getDataSfarsitConcediu()).isbefore(LocalDate.parse(listaProiecte.get(k).getDataInceput()))||LocalDate.parse(concediuAngajat.get(k).getDataInceputConcediu()).isAfter(LocalDate.parse(listaProiecte.get(k).getDataInceput()));
            boolean notok=LocalDate.parse(concediuAngajat.get(k).getDataInceputConcediu()).isAfter(LocalDate.parse(listaProiecte.get(k).getDataInceput()))&&LocalDate.parse(concediuAngajat.get(k).getDataInceputConcediu()).
                    isBefore(LocalDate.parse(listaProiecte.get(k).getDataDeadline()))||LocalDate.parse(concediuAngajat.get(k).getDataSfarsitConcediu()).isAfter(LocalDate.parse(listaProiecte.get(k).getDataInceput()));
