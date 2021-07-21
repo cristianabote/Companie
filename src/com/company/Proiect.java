@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -64,9 +65,9 @@ public class Proiect {
         this.dataDeadline=dataDeadline;
     }
     private static final String Proiecte_FILE = "c:\\InternshipBancaTransilvania\\Companie\\proiecteCompanie.txt";
-
+    public static List<Proiect> listaProiecte = new ArrayList<>();
     public static List<Proiect> citireaTuturorProiectelor() throws IOException {
-        List<Proiect> listaProiecte = new ArrayList<>();
+
         try (BufferedReader proiectReader = new BufferedReader(new FileReader(Proiecte_FILE))){
             String proiecteLine = null;
             while ((proiecteLine  = proiectReader.readLine()) != null) {
@@ -81,6 +82,48 @@ public class Proiect {
 
         return listaProiecte;
     }
+   public void numeAngajatiIndisponibili(String denumireProiect) throws IOException {
+        List<Angajat> totiAngajatiiCompanie = new ArrayList<>();
+        List<Concediu> concediuAngajat = new ArrayList<>();
+        try {
+            totiAngajatiiCompanie = Angajat.citireaTuturorAngajatilor();
+            concediuAngajat =Concediu.citireaTuturorConcediilor();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+       int i=0, gasit=0;
+       long idProiect=0;
+       while(i<listaProiecte.size()&&gasit==0){
+           if (denumireProiect.toLowerCase().equals(listaProiecte.get(i).getDenumireProiect().toLowerCase())){
+               gasit=1;
+               idProiect=listaProiecte.get(i).getIdProiect();
+           }
+           i++;
+       }
+       if(gasit==0) {
+           System.out.println("Proiectul nu a fost gasit.");
+       }
+  /*      for (int k = 0; k < totiAngajatiiCompanie.size(); i++) {
+           boolean ok = LocalDate.parse(concediuAngajat.get(k).getDataSfarsitConcediu()).isbefore(LocalDate.parse(listaProiecte.get(k).getDataInceput()))||LocalDate.parse(concediuAngajat.get(k).getDataInceputConcediu()).isAfter(LocalDate.parse(listaProiecte.get(k).getDataInceput()));
+           boolean notok=LocalDate.parse(concediuAngajat.get(k).getDataInceputConcediu()).isAfter(LocalDate.parse(listaProiecte.get(k).getDataInceput()))&&LocalDate.parse(concediuAngajat.get(k).getDataInceputConcediu()).
+                   isBefore(LocalDate.parse(listaProiecte.get(k).getDataDeadline()))||LocalDate.parse(concediuAngajat.get(k).getDataSfarsitConcediu()).isAfter(LocalDate.parse(listaProiecte.get(k).getDataInceput()));
 
+            if (totiAngajatiiCompanie.get(k).getIdAngajat()==concediuAngajat.get(k).getAngajat().getIdAngajat())
 
+            {
+                System.out.println(totiAngajatiiCompanie.get(k).getNume());
+                }
+            }*/
+    }
 }
+    /*google
+    the relationship of a date to another can be determined to occur before or after another date:
+  boolean notBefore = LocalDate.parse("2016-06-12")
+            .isBefore(LocalDate.parse("2016-06-11"));
+
+
+    boolean isAfter = LocalDate.parse("2016-06-12")
+            .isAfter(LocalDate.parse("2016-06-11"));
+
+   boolean ok = dataendconcediu.isbefore(datastartproiect)||(datstartconcediu.isafter(dataendproiect));
+   boolean notok = (datastartconcediu.isafter(datastatproiect)&&datastartoncediu.isbefore(dataendproiect))||(dataendconcediu.isafter(datastartproiect))*/

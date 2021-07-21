@@ -17,12 +17,21 @@ import java.util.List;
         private String prenume;
         private Date dataAngajarii;
         private Angajat superior;
-        private Departament departament;
-        private Functie functie;
+        private long  idDepartament;
+        private long idFunctie;
         private List<Proiect> listaProiecte;
         private List<Salariu> listaSalarii;
         private List<Concediu> listaConcedii;
 
+        public Angajat(long idAngajat, String nume, String prenume, Date dataAngajarii, long idSuperior, long idDepartament, long idFunctie) {
+            this.idAngajat = idAngajat;
+            this.nume = nume;
+            this.prenume = prenume;
+            this.dataAngajarii = dataAngajarii;
+            this.superior = getAngajat(idSuperior);
+            this.idDepartament = idDepartament;
+            this.idFunctie = idFunctie;
+        }
 
         public long getIdAngajat() {
             return idAngajat;
@@ -64,13 +73,7 @@ import java.util.List;
             this.superior = superior;
         }
 
-        public Departament getDepartament() {
-            return departament;
-        }
 
-        public void setDepartament(Departament departament) {
-            this.departament = departament;
-        }
 
         public void setListaSalarii(List<Salariu> listaSalarii) {
             this.listaSalarii = listaSalarii;
@@ -80,12 +83,20 @@ import java.util.List;
             this.listaConcedii = listaConcedii;
         }
 
-        public Functie getFunctie() {
-            return functie;
+        public long getIdDepartament() {
+            return idDepartament;
         }
 
-        public void setFunctie(Functie functie) {
-            this.functie = functie;
+        public void setIdDepartament(long idDepartament) {
+            this.idDepartament = idDepartament;
+        }
+
+        public long getIdFunctie() {
+            return idFunctie;
+        }
+
+        public void setIdFunctie(long idFunctie) {
+            this.idFunctie = idFunctie;
         }
 
         public List<Proiect> getListaProiecte() {
@@ -104,15 +115,7 @@ import java.util.List;
             return listaConcedii;
         }
 
-        public Angajat(long idAngajat, String nume, String prenume, Date dataAngajarii, long idSuperior, long idDepartament, long idFunctie) {
-            this.idAngajat = idAngajat;
-            this.nume = nume;
-            this.prenume = prenume;
-            this.dataAngajarii = dataAngajarii;
-            this.superior = getAngajat(idSuperior);
-            this.departament = departament;
-            this.functie = functie;
-        }
+
 
         private static final String Angajati_FILE = "c:\\InternshipBancaTransilvania\\Companie\\angajatiCompanie.txt";
         public static List<Angajat> listaAngajati = new ArrayList<>();
@@ -152,8 +155,6 @@ import java.util.List;
             }
         }
 
-
-
         public static long calculSalar(long idAngajat) throws IOException {
             List<Functie> functiiCompanie = new ArrayList<>();
             long salarActualizat = 0;
@@ -163,7 +164,7 @@ import java.util.List;
                 e.printStackTrace();
             }
             for (int j = 0; j < functiiCompanie.size(); j++) {
-                if (functiiCompanie.get(j).getIdFunctie() == Angajat.getAngajat(idAngajat).getFunctie().getIdFunctie()) {
+                if (functiiCompanie.get(j).getIdFunctie() == Angajat.getAngajat(idAngajat).getIdFunctie()) {
                     salarActualizat = Angajat.calculVechime(idAngajat) * functiiCompanie.get(j).getSalarBaza();
                 }
             }

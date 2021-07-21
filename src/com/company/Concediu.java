@@ -50,12 +50,12 @@ public class Concediu{
     public Concediu(long idConcediu, Angajat angajat, Date dataInceputConcediu, Date dataSfarsitConcediu){
       this.idConcediu=idConcediu;
       this.angajat=angajat;
-      dataInceputConcediu=dataInceputConcediu;
-      dataSfarsitConcediu=dataSfarsitConcediu;
+      this.dataInceputConcediu=dataInceputConcediu;
+      this.dataSfarsitConcediu=dataSfarsitConcediu;
     }
     private static final String Concedii_FILE = "c:\\InternshipBancaTransilvania\\Companie\\concediiAngajati.txt";
 
-    public List<Concediu> citireaTuturorConcediilor() throws IOException {
+    public static List<Concediu> citireaTuturorConcediilor() throws IOException {
         List<Concediu> listaConcedii = new ArrayList<>();
         try (BufferedReader concediiReader = new BufferedReader(new FileReader(Concedii_FILE))){
             String concediiLine = null;
@@ -68,7 +68,7 @@ public class Concediu{
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
-
         return listaConcedii;
     }
+
 }
