@@ -1,0 +1,8 @@
+1;manager;4000;
+2;operator;2700;
+3;coordonator;3800;
+4;secretara;2000;
+5;inginer;5500;
+6;tester;3500;
+7;proiectant;5000;
+8;programator;3700;
