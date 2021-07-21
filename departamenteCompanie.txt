@@ -1,4 +1,4 @@
-1;IT;Rares
-2;Administrativ;Laura
-3;Tehnic;Raul
-4;Logistica;Flaviu
+1;IT;Rares;
+2;Administrativ;Laura;
+3;Tehnic;Raul;
+4;Logistica;Flaviu;

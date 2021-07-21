@@ -166,8 +166,9 @@ import java.util.List;
                 if (functiiCompanie.get(j).getIdFunctie() == Angajat.getAngajat(idAngajat).getFunctie().getIdFunctie()) {
                     salarActualizat = Angajat.calculVechime(idAngajat) * functiiCompanie.get(j).getSalarBaza();
                 }
-
             }
         return salarActualizat;
         }
+
+
     }
