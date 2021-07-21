@@ -17,7 +17,7 @@ public class Main {
         System.out.println("1. Calcularea salariului unui angajat in functie de vechimea lui.");
         System.out.println("2. Afisarea tuturor concediilor din companie, a tuturor proiectelor si persoanele indisponibile.");
         System.out.println("3. Afisarea tuturor angajatilor dintr-un departament al companiei.");
-        System.out.println("4. Afisarea tuturor proiectelor din cadrul companiei.");//
+        System.out.println("4. Afisarea tuturor proiectelor din cadrul companiei.");
         System.out.println("5. Afisarea tuturor functiilor cu salarul de baza aferent fiecarei functii.");
         System.out.println("Introduceti optiunea dorita: ");
         int optiune = scan.nextInt();
@@ -41,7 +41,7 @@ public class Main {
                     long idA=scan.nextInt();
 
                     // Calcularea Salariului Angajatului introdus
-                    System.out.println(Angajat.calculSalar(idA));
+                    System.out.println("Salariul actual este: "+ Angajat.calculSalar(idA));
                 break;
             }
 

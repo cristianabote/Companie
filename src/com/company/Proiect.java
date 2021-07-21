@@ -17,6 +17,7 @@ public class Proiect {
     private Date dataInceput;
     private Date dataDeadline;
     private List<Angajat> angajati;
+    private List<Departament> departamente;
 
     public long getIdProiect() {
         return idProiect;
