@@ -62,4 +62,5 @@ public class Functie {
         }
         return listaFunctii;
     }
+
 }

@@ -40,9 +40,9 @@ public class Salariu {
         this.suma = suma;
     }
 
-    public Salariu(long idSalariu, Angajat angajat, Date dataAcordare, long suma){
+    public Salariu(long idSalariu, long Angajat, Date dataAcordare, long suma){
         this.idSalariu=idSalariu;
-        this.angajat=angajat;
+        this.angajat=getAngajat();
         this.dataAcordare=dataAcordare;
         this.suma=suma;
     }

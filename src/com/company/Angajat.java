@@ -4,6 +4,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -107,13 +110,13 @@ import java.util.List;
             this.prenume=prenume;
             this.dataAngajarii=dataAngajarii;
             this.superior=getAngajat(idSuperior);
+            this.departament=departament;
             this.functie=functie;
         }
 
         private static final String Angajati_FILE = "c:\\InternshipBancaTransilvania\\Companie\\angajatiCompanie.txt";
-
-        public List<Angajat> citireaTuturorAngajatilor() throws IOException {
-            List<Angajat> listaAngajati = new ArrayList<>();
+        public static List<Angajat> listaAngajati = new ArrayList<>();
+        public static List<Angajat> citireaTuturorAngajatilor() throws IOException {
             try (BufferedReader angajatReader = new BufferedReader(new FileReader(Angajati_FILE))) {
                 String angajatLine = null;
                 while ((angajatLine = angajatReader.readLine()) != null) {
@@ -128,16 +131,25 @@ import java.util.List;
             return listaAngajati;
         }
 
-       public static Angajat getAngajat(long idAngajat){
-           List<Angajat> listaAngajati = new ArrayList<>();
-            for (int i = 0; i<listaAngajati.size(); i++) {
-                if (listaAngajati.get(i).equals(idAngajat))
-                    return listaAngajati.get(i);
+       public static Angajat getAngajat(long idAngajat) {
+
+           for (int i = 0; i < listaAngajati.size(); i++) {
+               if (listaAngajati.get(i).idAngajat==idAngajat)
+                   return listaAngajati.get(i);
+           }
+           return null;
+       }
+        LocalDate dataCurenta= LocalDate.now();
+        public int calcul_vechime(long idAngajat) throws IOException {
+
+            try {
+                int vechime = Period.between(dataCurenta, Angajat.getAngajat(idAngajat).getDataAngajarii().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()).getYears();
+                if(vechime==0) return 1;
+                else return vechime;
+            }catch(Exception e){
+                return 0;
             }
-            return null;
         }
-
-
     }
 
 
